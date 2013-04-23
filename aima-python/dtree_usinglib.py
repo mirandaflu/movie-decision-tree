@@ -28,5 +28,3 @@ while 1:
     print test(learner, movies, None, verbose)
 
     print 'done'
-
-#2A gives list index out of range error
