@@ -1,7 +1,6 @@
 """Learn to estimate functions  from examples. (Chapters 18-20)"""
 
 from utils import *
-import agents, random, operator
 
 #______________________________________________________________________________
 
@@ -112,19 +111,6 @@ def parse_csv(input, delim=','):
     lines = [line for line in input.splitlines() if line.strip() is not '']
     return [map(num_or_str, line.split(delim)) for line in lines]
 
-def rms_error(predictions, targets):
-    return math.sqrt(ms_error(predictions, targets))
-
-def ms_error(predictions, targets):
-    return mean([(p - t)**2 for p, t in zip(predictions, targets)])
-
-def mean_error(predictions, targets):
-    return mean([abs(p - t) for p, t in zip(predictions, targets)])
-
-def mean_boolean_error(predictions, targets):
-    return mean([(p != t)   for p, t in zip(predictions, targets)])
-
-
 #______________________________________________________________________________
 
 class Learner:
@@ -136,100 +122,7 @@ class Learner:
 
     def predict(self, example): 
         abstract
-
-#______________________________________________________________________________
-
-class MajorityLearner(Learner):
-    """A very dumb algorithm: always pick the result that was most popular
-    in the training data.  Makes a baseline for comparison."""
-
-    def train(self, dataset):
-        "Find the target value that appears most often."
-        self.most_popular = mode([e[dataset.target] for e in dataset.examples])
-
-    def predict(self, example):
-        "Always return same result: the most popular from the training set."
-        return self.most_popular
-
-#______________________________________________________________________________
-
-class NaiveBayesLearner(Learner):
-    
-    def train(self, dataset):
-        """Just count the target/attr/val occurences.
-        Count how many times each value of each attribute occurs.
-        Store count in N[targetvalue][attr][val]. Let N[attr][None] be the
-        sum over all vals."""
-        N = {}
-        ## Initialize to 0
-        for gv in self.dataset.values[self.dataset.target]:
-            N[gv] = {}
-            for attr in self.dataset.attrs:
-                N[gv][attr] = {}
-                for val in self.dataset.values[attr]:
-                    N[gv][attr][val] = 0
-                    N[gv][attr][None] = 0
-        ## Go thru examples
-        for example in self.dataset.examples:
-            Ngv = N[example[self.dataset.target]]
-            for attr in self.dataset.attrs:
-                Ngv[attr][example[attr]] += 1
-                Ngv[attr][None] += 1
-        self._N = N
-
-    def N(self, targetval, attr, attrval):
-       "Return the count in the training data of this combination."
-       try:
-          return self._N[targetval][attr][attrval]
-       except KeyError:
-          return 0
-
-    def P(self, targetval, attr, attrval):
-        """Smooth the raw counts to give a probability estimate.
-        Estimate adds 1 to numerator and len(possible vals) to denominator."""
-        return ((self.N(targetval, attr, attrval) + 1.0) /
-                (self.N(targetval, attr, None) + len(self.dataset.values[attr])))
-
-    def predict(self, example):
-        """Predict the target value for example. Consider each possible value,
-        choose the most likely, by looking at each attribute independently."""
-        possible_values = self.dataset.values[self.dataset.target]
-        def class_probability(targetval):
-            return product([self.P(targetval, a, example[a])
-                            for a in self.dataset.inputs], 1)
-        return argmax(possible_values, class_probability)
-
-#______________________________________________________________________________
-
-class NearestNeighborLearner(Learner):
-
-    def __init__(self, k=1):
-        "k-NearestNeighbor: the k nearest neighbors vote."
-        self.k = k
-
-    def predict(self, example):
-        """With k=1, find the point closest to example.
-        With k>1, find k closest, and have them vote for the best."""
-        if self.k == 1:
-            neighbor = argmin(self.dataset.examples,
-                              lambda e: self.distance(e, example))
-            return neighbor[self.dataset.target]
-        else:
-            ## Maintain a sorted list of (distance, example) pairs.
-            ## For very large k, a PriorityQueue would be better
-            best = [] 
-            for e in examples:
-                d = self.distance(e, example)
-                if len(best) < k: 
-                    e.append((d, e))
-                elif d < best[-1][0]:
-                    best[-1] = (d, e)
-                    best.sort()
-            return mode([e[self.dataset.target] for (d, e) in best])
-
-    def distance(self, e1, e2):
-        return mean_boolean_error(e1, e2)
-
+		
 #______________________________________________________________________________
 
 class DecisionTree:
@@ -350,75 +243,6 @@ def information_content(values):
     if s != 1.0: values = [v/s for v in values]
     return sum([- v * log2(v) for v in values])
 
-#______________________________________________________________________________
-
-### A decision list is implemented as a list of (test, value) pairs.
-
-class DecisionListLearner(Learner):
-
-    def train(self, dataset): 
-        self.dataset = dataset 
-        self.attrnames = dataset.attrnames 
-        self.dl = self.decision_list_learning(Set(dataset.examples))
-
-    def decision_list_learning(self, examples):
-        """[Fig. 18.14]"""
-        if not examples:
-            return [(True, No)]
-        t, o, examples_t = self.find_examples(examples)
-        if not t:
-            raise Failure
-        return [(t, o)] + self.decision_list_learning(examples - examples_t)
-
-    def find_examples(self, examples):
-        """Find a set of examples that all have the same outcome under some test.
-        Return a tuple of the test, outcome, and examples."""
-        NotImplemented
-#______________________________________________________________________________
-
-class NeuralNetLearner(Learner):
-   """Layered feed-forward network."""
-
-   def __init__(self, sizes):
-      self.activations = map(lambda n: [0.0 for i in range(n)], sizes)
-      self.weights = []
-
-   def train(self, dataset):
-      NotImplemented
-
-   def predict(self, example):
-      NotImplemented
-
-class NNUnit:
-   """Unit of a neural net."""
-   def __init__(self): 
-       NotImplemented
-
-class PerceptronLearner(NeuralNetLearner):
-
-   def predict(self, example):
-      return sum([])
-#______________________________________________________________________________
-
-class Linearlearner(Learner):
-   """Fit a linear model to the data."""
-
-   NotImplemented
-#______________________________________________________________________________
-
-class EnsembleLearner(Learner):
-    """Given a list of learning algorithms, have them vote."""
-
-    def __init__(self, learners=[]):
-        self.learners=learners
-
-    def train(self, dataset):
-        for learner in self.learners:
-           learner.train(dataset)
-
-    def predict(self, example):
-        return mode([learner.predict(example) for learner in self.learners])
-        
 #_____________________________________________________________________________
 # Functions for testing learners on examples
 
@@ -479,108 +303,3 @@ def learningcurve(learner, dataset, trials=10, sizes=None):
         return train_and_test(learner, dataset, 0, size)
     return [(size, mean([score(learner, size) for t in range(trials)]))
             for size in sizes]
-
-#______________________________________________________________________________
-# The rest of this file gives Data sets for machine learning problems.
-
-orings = DataSet(name='orings', target='Distressed',
-                 attrnames="Rings Distressed Temp Pressure Flightnum")
-
-
-zoo = DataSet(name='zoo', target='type', exclude=['name'],
-              attrnames="name hair feathers eggs milk airborne aquatic " +
-              "predator toothed backbone breathes venomous fins legs tail " +
-              "domestic catsize type") 
-
-
-iris = DataSet(name="iris", target="class",
-               attrnames="sepal-len sepal-width petal-len petal-width class")
-
-#______________________________________________________________________________
-# The Restaurant example from Fig. 18.2
-
-def RestaurantDataSet(examples=None):
-    "Build a DataSet of Restaurant waiting examples."
-    return DataSet(name='restaurant', target='Wait', examples=examples,
-                  attrnames='Alternate Bar Fri/Sat Hungry Patrons Price '
-                   + 'Raining Reservation Type WaitEstimate Wait')
-
-restaurant = RestaurantDataSet()
-
-def T(attrname, branches):
-    return DecisionTree(restaurant.attrnum(attrname), attrname, branches)
-
-Fig[18,2] = T('Patrons',
-             {'None': 'No', 'Some': 'Yes', 'Full':
-              T('WaitEstimate',
-                {'>60': 'No', '0-10': 'Yes', 
-                 '30-60':
-                 T('Alternate', {'No':
-                                 T('Reservation', {'Yes': 'Yes', 'No':
-                                                   T('Bar', {'No':'No',
-                                                             'Yes':'Yes'})}),
-                                 'Yes':
-                                 T('Fri/Sat', {'No': 'No', 'Yes': 'Yes'})}),
-                 '10-30':
-                 T('Hungry', {'No': 'Yes', 'Yes':
-                           T('Alternate',
-                             {'No': 'Yes', 'Yes':
-                              T('Raining', {'No': 'No', 'Yes': 'Yes'})})})})})
-
-def SyntheticRestaurant(n=20):
-    "Generate a DataSet with n examples."
-    def gen():
-        example =  map(random.choice, restaurant.values)
-        example[restaurant.target] = Fig[18,2].predict(example)
-        return example
-    return RestaurantDataSet([gen() for i in range(n)])
-
-#______________________________________________________________________________
-# Artificial, generated  examples.
-
-def Majority(k, n):
-    """Return a DataSet with n k-bit examples of the majority problem:
-    k random bits followed by a 1 if more than half the bits are 1, else 0."""
-    examples = []
-    for i in range(n):
-        bits = [random.choice([0, 1]) for i in range(k)]
-        bits.append(sum(bits) > k/2)
-        examples.append(bits)
-    return DataSet(name="majority", examples=examples)
-
-def Parity(k, n, name="parity"):
-    """Return a DataSet with n k-bit examples of the parity problem:
-    k random bits followed by a 1 if an odd number of bits are 1, else 0."""
-    examples = []
-    for i in range(n):
-        bits = [random.choice([0, 1]) for i in range(k)]
-        bits.append(sum(bits) % 2)
-        examples.append(bits)
-    return DataSet(name=name, examples=examples)
-
-def Xor(n):
-    """Return a DataSet with n examples of 2-input xor."""
-    return Parity(2, n, name="xor")
-
-def ContinuousXor(n):
-    "2 inputs are chosen uniformly form (0.0 .. 2.0]; output is xor of ints."
-    examples = []
-    for i in range(n):
-        x, y = [random.uniform(0.0, 2.0) for i in '12']
-        examples.append([x, y, int(x) != int(y)])
-    return DataSet(name="continuous xor", examples=examples)
-
-#______________________________________________________________________________
-
-def compare(algorithms=[MajorityLearner, NaiveBayesLearner, 
-                        NearestNeighborLearner, DecisionTreeLearner],
-            datasets=[iris, orings, zoo, restaurant, SyntheticRestaurant(20),
-                      Majority(7, 100), Parity(7, 100), Xor(100)],
-            k=10, trials=1):
-    """Compare various learners on various datasets using cross-validation.
-    Print results as a table."""
-    print_table([[a.__name__.replace('Learner','')] +
-                 [cross_validation(a(), d, k, trials) for d in datasets]
-                 for a in algorithms],
-                header=[''] + [d.name[0:7] for d in datasets], round=2)
-    

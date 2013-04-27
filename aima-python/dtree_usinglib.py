@@ -20,7 +20,11 @@ while 1:
                      attrnames="like_movie like_director like_actors dislike_actors series_seen_previous trailer positive_rating recommended access remake_seen_original subscribe_online theater_close like_theater with_whom cost opening_weekend")
 
     learner.train(movies)
-    learner.dt.display()
+
+    if (str(learner.dt) == learner.dt):
+        print 'always answers '+learner.dt
+    else:
+        learner.dt.display()
 	
     verbose = 1 # 0=none, 1=only negative outcomes, 2=all
 
