@@ -1,4 +1,8 @@
-"""Learn to estimate functions  from examples. (Chapters 18-20)"""
+""" originally from aima-python (aima-python.googlecode.com)
+functions not needed for our project have been removed
+
+Learn to estimate functions  from examples. (Chapters 18-20)
+"""
 
 from utils import *
 

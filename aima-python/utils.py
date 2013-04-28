@@ -1,5 +1,7 @@
-"""Provide some widely useful utilities. Safe for "from utils import *".
+""" originally from aima-python (aima-python.googlecode.com)
+functions not needed for our project have been removed
 
+Provide some widely useful utilities. Safe for "from utils import *".
 """
 
 from __future__ import generators
