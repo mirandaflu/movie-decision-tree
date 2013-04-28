@@ -1,11 +1,11 @@
-"Y","DN","Y","N","Y","Y","DN","Y","T","Y",,,,"F","$13.00 ","N"
-"Y","DN","DN","N","N","Y","DN","Y","T","N",,,,"DN","$13.00 ","N"
-"Y","DN","Y","N","N","Y","DN","Y","H","N",,,,"A","DN","N"
-"Y","DN","DN","N","N","DN","DN","Y","H","N",,,,"F","DN","N"
-"N","DN","DN","N","N","DN","DN","Y","H","N",,,,"F","DN","N"
-"Y","Y","Y","N","Y","Y","DN","Y","T","N",,,,"F","$13.00 ","N"
-"Y","Y","Y","N","Y","Y","D","Y","T","N",,,,"F","$13.00 ","N"
-"Y","Y","Y","N","N","DN","DN","Y","T","N",,,,"F","$10.50 ","N"
-"Y","Y","Y","N","Y","Y","D","Y","T","N",,,,"F","$13.00 ","N"
-"N","DN","DN","N","N","DN","DN","Y","T","N",,,,"F","DN","N"
-"Y","DN","DN","N","N","Y","DN","Y","T","N",,,,"F","$13.00 ","N"
+Y,DN,Y,N,Y,Y,DN,Y,T,Y,,,,friends,13,N
+Y,DN,DN,N,N,Y,DN,Y,T,N,,,,DN,13,N
+Y,DN,Y,N,N,Y,DN,Y,H,N,,,,alone,DN,N
+Y,DN,DN,N,N,DN,DN,Y,H,N,,,,friends,DN,N
+N,DN,DN,N,N,DN,DN,Y,H,N,,,,friends,DN,N
+Y,Y,Y,N,Y,Y,DN,Y,T,N,,,,friends,13,N
+Y,Y,Y,N,Y,Y,D,Y,T,N,,,,friends,13,N
+Y,Y,Y,N,N,DN,DN,Y,T,N,,,,friends,10.5,N
+Y,Y,Y,N,Y,Y,D,Y,T,N,,,,friends,13,N
+N,DN,DN,N,N,DN,DN,Y,T,N,,,,friends,DN,N
+Y,DN,DN,N,N,Y,DN,Y,T,N,,,,friends,13,N

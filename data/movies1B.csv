@@ -1,30 +1,30 @@
-"n","dk","y","n","n","y","dk","n","h","n","n","y","n","alone","free","n"
-"n","y","y","y","y","y","dk","n","h","y","n","y","n","alone","free","n"
-"y","y","y","n","y","y","y","y","t","y","n","y","n","with friend(s)","$10 ","n"
-"n","dk","n","n","n","dns","dk","y","h","n","n","y","n","with friend(s)","$8 ","n"
-"n","dk","y","n","n","y","dk","n","h","n","n","y","n","alone","free","n"
-"y","y","y","n","n","y","dk","y","h","n","n","y","n","alone","free","n"
-"y","dk","y","n","n","y","dk","n","h","n","n","y","n","with friend(s)","free","n"
-"y","y","y","n","y","y","y","y","h","y","n","y","n","with friend(s)","free","n"
-"y","dk","n","n","n","y","dk","y","h","n","n","y","n","on a date","free","n"
-"y","dk","n","n","n","n","dk","y","h","n","n","y","n","alone","free","n"
-"y","dk","n","n","n","y","dk","y","h","n","n","y","n","alone","free","n"
-"y","y","y","y","y","y","y","y","h","y","n","y","n","alone","free","n"
-"y","y","y","n","n","y","y","y","h","n","n","y","n","alone","free","n"
-"y","y","y","n","y","y","y","y","h","y","n","y","n","alone","free","n"
-"y","y","y","n","y","y","y","y","h","y","n","y","n","alone","free","n"
-"y","y","y","n","n","y","y","y","t","n","n","y","n","with friend(s)","$10 ","n"
-"n","dk","y","n","n","y","dk","n","h","n","n","y","n","alone","free","n"
-"y","dk","y","n","n","y","y","n","h","n","n","y","n","alone","free","n"
-"y","dk","y","n","y","y","y","y","h","y","n","y","n","alone","free","n"
-"y","y","y","n","n","y","dk","n","t","n","n","y","n","$10 ","free","n"
-"y","y","y","n","y","y","y","y","t","y","n","y","n","$10 ","free","n"
-"y","y","y","n","y","y","y","y","h","y","n","y","n","with friend(s)","free","n"
-"n","dk","y","n","n","y","dk","n","h","n","n","y","n","alone","free","n"
-"y","y","y","n","n","dns","dk","n","h","n","n","y","n","alone","free","n"
-"y","y","y","n","n","y","dk","y","h","n","n","y","n","alone","free","n"
-"n","dk","y","n","n","dns","dk","n","h","n","n","y","n","alone","free","n"
-"n","y","y","n","y","y","dk","n","h","y","n","y","n","with friend(s)","free","n"
-"y","dk","y","n","n","y","dk","n","h","n","n","y","n","alone","free","n"
-"y","y","y","n","n","dns","dk","n","h","n","n","y","n","alone","free","n"
-"y","y","y","n","n","dns","y","y","h","n","n","y","n","alone","free","n"
+N,DN,Y,N,N,Y,DN,N,H,N,N,Y,N,alone,0,N
+N,Y,Y,Y,Y,Y,DN,N,H,Y,N,Y,N,alone,0,N
+Y,Y,Y,N,Y,Y,Y,Y,T,Y,N,Y,N,friends,10,N
+N,DN,N,N,N,DNS,DN,Y,H,N,N,Y,N,friends,8,N
+N,DN,Y,N,N,Y,DN,N,H,N,N,Y,N,alone,0,N
+Y,Y,Y,N,N,Y,DN,Y,H,N,N,Y,N,alone,0,N
+Y,DN,Y,N,N,Y,DN,N,H,N,N,Y,N,friends,0,N
+Y,Y,Y,N,Y,Y,Y,Y,H,Y,N,Y,N,friends,0,N
+Y,DN,N,N,N,Y,DN,Y,H,N,N,Y,N,date,0,N
+Y,DN,N,N,N,N,DN,Y,H,N,N,Y,N,alone,0,N
+Y,DN,N,N,N,Y,DN,Y,H,N,N,Y,N,alone,0,N
+Y,Y,Y,Y,Y,Y,Y,Y,H,Y,N,Y,N,alone,0,N
+Y,Y,Y,N,N,Y,Y,Y,H,N,N,Y,N,alone,0,N
+Y,Y,Y,N,Y,Y,Y,Y,H,Y,N,Y,N,alone,0,N
+Y,Y,Y,N,Y,Y,Y,Y,H,Y,N,Y,N,alone,0,N
+Y,Y,Y,N,N,Y,Y,Y,T,N,N,Y,N,friends,10 ,N
+N,DN,Y,N,N,Y,DN,N,H,N,N,Y,N,alone,0,N
+Y,DN,Y,N,N,Y,Y,N,H,N,N,Y,N,alone,0,N
+Y,DN,Y,N,Y,Y,Y,Y,H,Y,N,Y,N,alone,0,N
+Y,Y,Y,N,N,Y,DN,N,T,N,N,Y,N,10 ,0,N
+Y,Y,Y,N,Y,Y,Y,Y,T,Y,N,Y,N,10 ,0,N
+Y,Y,Y,N,Y,Y,Y,Y,H,Y,N,Y,N,friends,0,N
+N,DN,Y,N,N,Y,DN,N,H,N,N,Y,N,alone,0,N
+Y,Y,Y,N,N,DNS,DN,N,H,N,N,Y,N,alone,0,N
+Y,Y,Y,N,N,Y,DN,Y,H,N,N,Y,N,alone,0,N
+N,DN,Y,N,N,DNS,DN,N,H,N,N,Y,N,alone,0,N
+N,Y,Y,N,Y,Y,DN,N,H,Y,N,Y,N,friends,0,N
+Y,DN,Y,N,N,Y,DN,N,H,N,N,Y,N,alone,0,N
+Y,Y,Y,N,N,DNS,DN,N,H,N,N,Y,N,alone,0,N
+Y,Y,Y,N,N,DNS,Y,Y,H,N,N,Y,N,alone,0,N

@@ -1,8 +1,8 @@
-"Y","DN","Y","Y","Y","Y","Y","NR","H","Y","Y",,"N","Alone",0,"N"
-"Y","Y","Y","N","DNS","DNS","Y","NR","T","DN","Y","1 mile","N","Friends",13,"N"
-"Y","Y","Y","N","DNS","DNS","Y","Y",,"N","Y","3M","N","Friends",13,"Y"
-"N","N","N","Y","DNS","N","Y","N","T","N","Y","1M","N","Friends",13,"N"
-"Y","Y","Y","N","N","Y","Y","Y","T","N","Y","3M","N","Friends",13,"N"
-"Y","Y","Y","N","N","Y","Y","Y","T","N",,"3M","N","Friends",13,"N"
-"Y","Y","Y","N","N","Y","Y","Y","T","N",,".5M","N","Friends",,"N"
-"Y","Y","Y","Y","Y","Y","Y","Y","H","Y",,".5M","N",,,
+Y,DN,Y,Y,Y,Y,Y,NR,H,Y,Y,,N,alone,0,N
+Y,Y,Y,N,DNS,DNS,Y,NR,T,DN,Y,1 mile,N,friends,13,N
+Y,Y,Y,N,DNS,DNS,Y,Y,,N,Y,3M,N,friends,13,Y
+N,N,N,Y,DNS,N,Y,N,T,N,Y,1M,N,friends,13,N
+Y,Y,Y,N,N,Y,Y,Y,T,N,Y,3M,N,friends,13,N
+Y,Y,Y,N,N,Y,Y,Y,T,N,,3M,N,friends,13,N
+Y,Y,Y,N,N,Y,Y,Y,T,N,,.5M,N,friends,,N
+Y,Y,Y,Y,Y,Y,Y,Y,H,Y,,.5M,N,,,
