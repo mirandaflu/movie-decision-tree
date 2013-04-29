@@ -212,7 +212,6 @@ class DecisionTreeLearner(Learner):
         else:
             best = self.choose_attribute(attrs, examples)
             info_gain = self.information_gain(best, examples)
-            print info_gain
 	    if info_gain < info_gain_threshold:
                 return self.majority_value(examples)
             tree = DecisionTree(best, self.attrnames[best])
@@ -310,13 +309,25 @@ def cross_validation(learner, dataset, k=10, trials=1):
     if k == None:
         k = len(dataset.examples)
     if trials > 1:
-        return mean([cross_validation(learner, dataset, k, trials=1)
-                     for t in range(trials)])
+        best = 0
+        bestree = None
+        for t in range(trials):
+            a = cross_validation(learner, dataset, k, trials=1)
+            if a > best:
+                best = a
+                besttree = learner.dt
+        return [best, besttree]
     else:
         n = len(dataset.examples)
         random.shuffle(dataset.examples)
-        return mean([train_and_test(learner, dataset, i*(n/k), (i+1)*(n/k))
-                     for i in range(k)])
+        best = 0
+        besttree = None
+        for i in range(k):
+            a = train_and_test(learner, dataset, i*(n/k), (i+1)*(n/k))
+            if a > best:
+                best = a
+                besttree = learner.dt
+        return [best, besttree]
     
 def leave1out(learner, dataset):
     "Leave one out cross-validation over the dataset."

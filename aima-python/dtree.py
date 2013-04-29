@@ -19,6 +19,17 @@ def printMenu_returnChoice(hasbeentrained):
         response = raw_input("What would you like to do?")
     return int(response)
 
+def printMethods_returnChoice():
+    print 'Methods:'
+    print '  0 default'
+    print '  1 use all examples'
+    print '  2 leave one example out'
+    print '  3 leave 1/k of the examples out'
+    ans = ''
+    while (is_number(ans) != True) or (int(ans) > 3) or (int(ans) < 0):
+        ans = raw_input("Which method?")
+    return ans
+
 def is_number(s):
     try:
         float(s)
@@ -102,7 +113,24 @@ while 1:
                               target='like_movie', #attr trying to predict
                              #list of attributes to predict on, matches columns in csv
                              attrnames="like_movie like_director like_actors dislike_actors series_seen_previous trailer positive_rating recommended access remake_seen_original subscribe_online theater_close like_theater with_whom cost opening_weekend")
-        learner.train(trainingset)
+
+        ans = printMethods_returnChoice()
+
+        if int(ans) == 0:
+            [best, besttree] = cross_validation(learner,trainingset,10,3)
+            learner.dt = besttree
+        elif int(ans) == 1:
+            learner.train(trainingset)
+        elif int(ans) == 2:
+            [best, besttree] = leave1out(learner,trainingset)
+            learner.dt = besttree
+        elif int(ans) == 3:
+            k = 'a'
+            while (is_number(k) != True) or (k < 1):
+                k = raw_input("k?")
+            [best, besttree] = cross_validation(learner,trainingset,int(k),3)
+            learner.dt = besttree
+        
         hasbeentrained = True
         print 'trained'
         
@@ -114,7 +142,24 @@ while 1:
                          target='like_movie', #attr trying to predict
                          #list of attributes to predict on, matches columns in csv
                          attrnames="like_movie like_director like_actors dislike_actors series_seen_previous trailer positive_rating recommended access remake_seen_original subscribe_online theater_close like_theater with_whom cost opening_weekend")
-        learner.train(trainingset)
+
+        ans = printMethods_returnChoice()
+
+        if int(ans) == 0:
+            [best, besttree] = cross_validation(learner,trainingset,10,3)
+            learner.dt = besttree
+        elif int(ans) == 1:
+            learner.train(trainingset)
+        elif int(ans) == 2:
+            [best, besttree] = leave1out(learner,trainingset)
+            learner.dt = besttree
+        elif int(ans) == 3:
+            k = 'a'
+            while (is_number(k) != True) or (k < 1):
+                k = raw_input("k?")
+            [best, besttree] = cross_validation(learner,trainingset,int(k),3)
+            learner.dt = besttree
+        
         hasbeentrained = True
         print 'trained'
 
