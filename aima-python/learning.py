@@ -4,6 +4,8 @@ functions not needed for our project have been removed
 Learn to estimate functions  from examples. (Chapters 18-20)
 """
 
+info_gain_threshold = 0.1
+
 from utils import *
 
 #______________________________________________________________________________
@@ -146,6 +148,22 @@ class DecisionTree:
             return child.predict(example)
         else:
             return child
+	
+    def probability(self, val):
+        total = 0
+        pos = 0
+        branches = self.branches
+        for b in branches:
+            branch = branches[b]
+            if str(branch) == branch:
+                if str(branch) == val:
+                    pos = pos + 1
+                total = total + 1
+            else:
+                res = branch.probability(val)
+                pos = pos + res[0]
+                total = total + res[1]
+        return [pos, total]
 
     def add(self, val, subtree):
         "Add a branch.  If self.attr = val, go to the given subtree."
@@ -153,8 +171,9 @@ class DecisionTree:
         return self
 
     def display(self, indent=0):
+        [prob1, prob2] = self.probability('Y')
         name = self.attrname
-        print 'Test', name
+        print 'Test', name, '[P(yes) = ' + str(prob1) + '/' + str(prob2) + ']'
         for (val, subtree) in self.branches.items():
             print ' '*4*indent, name, '=', val, '==>',
             if isinstance(subtree, DecisionTree):
@@ -192,6 +211,10 @@ class DecisionTreeLearner(Learner):
             return self.majority_value(examples)
         else:
             best = self.choose_attribute(attrs, examples)
+            info_gain = self.information_gain(best, examples)
+            print info_gain
+	    if info_gain < info_gain_threshold:
+                return self.majority_value(examples)
             tree = DecisionTree(best, self.attrnames[best])
             for (v, examples_i) in self.split_by(best, examples):
                 subtree = self.decision_tree_learning(examples_i,
