@@ -67,38 +67,37 @@ while 1:
         print test(learner, testset, None, 2)
 
     elif c == 2:
-        #train over all the data
-        import os
-        if os.path.exists('../data/all_data.csv') == False:
-            f = file('../data/all_data.csv','w')
-            for survey in ['1A','1B','2A','2B','3A','3B','4A','4B','5A','6A','6B','7A','8A','9A','9B','10A','10B','11A','11B','12A','12B']:
-                f2 = open('../data/movies'+survey+'.csv','r')
-                lines = f2.readlines()
-                for line in lines:
-                    props = line.split(',')
-                    for i in range(0,16):
-                        props[i] = props[i].strip()
+        #train over all the data        
+        f = file('../data/all_data.csv','w')
+        for survey in ['1A','1B','2A','2B','3A','3B','4A','4B','5A','6A','6B','7A','8A','9A','9B','10A','10B','11A','11B','12A','12B']:
+            f2 = open('../data/movies'+survey+'.csv','r')
+            lines = f2.readlines()
+            for line in lines:
+                props = line.split(',')
+                for i in range(0,16):
+                    props[i] = props[i].strip()
 
-                    #categorize prices
-                    if is_number(props[14]):
-                        cost = float(props[14])
-                        if cost < 1:
-                            props[14] = 'free'
-                        elif cost < 10:
-                            props[14] = 'low'
-                        elif cost < 20:
-                            props[14] = 'medium'
-                        elif cost < 50:
-                            props[14] = 'high'
+                #categorize prices
+                if is_number(props[14]):
+                    cost = float(props[14])
+                    if cost < 1:
+                        props[14] = 'free'
+                    elif cost < 10:
+                        props[14] = 'low'
+                    elif cost < 20:
+                        props[14] = 'medium'
+                    elif cost < 50:
+                        props[14] = 'high'
 
-                    #categorize opening weekend
-                    if props[15] != 'Y':
-                        props[15] = 'N'
-                    
-                    line = ','.join(props[0:15]) + '\n'
-                    f.write(line)
-                f2.close()
-            f.close()
+                #categorize opening weekend
+                if props[15] != 'Y':
+                    props[15] = 'N'
+                
+                line = ','.join(props[0:15]) + '\n'
+                f.write(line)
+            f2.close()
+        f.close()
+        
         trainingset = DataSet(name='all_data', #for display, csv file matches
                               target='like_movie', #attr trying to predict
                              #list of attributes to predict on, matches columns in csv
