@@ -4,6 +4,7 @@ functions not needed for our project have been removed
 Learn to estimate functions  from examples. (Chapters 18-20)
 """
 
+#this is the threshold for information gain used to cut off the tree
 info_gain_threshold = 0.1
 
 from utils import *
@@ -212,6 +213,7 @@ class DecisionTreeLearner(Learner):
         else:
             best = self.choose_attribute(attrs, examples)
             info_gain = self.information_gain(best, examples)
+            #this is where the information gain threshold is applied
 	    if info_gain < info_gain_threshold:
                 return self.majority_value(examples)
             tree = DecisionTree(best, self.attrnames[best])
